@@ -1,0 +1,31 @@
+
+
+# create a database with table in sql:
+>mysql:
+
+mysql -u root -p
+
+create database imdb;
+
+use imdb;
+
+create table movie(id int, name varchar(100), year int, rank float);
+
+grand all privileges on imdb.* to ''@localhost;
+
+
+
+
+# move a file from local machine to HDFS:
+
+scp ~/gHub/python_test/mov3.csv root@104.131.59.31:/root/data_dir/
+
+hadoop dfs -copyFromLocal /root/data_dir/mov3.csv /tmp
+hadoop fs -ls /tmp/
+hadoop dfs -cat /tmp/mov3.csv;
+
+
+# sqoop export command:
+
+sqoop export --connect jdbc:mysql://localhost/imdb --table movie --export-dir /tmp/mov3.csv;
+
